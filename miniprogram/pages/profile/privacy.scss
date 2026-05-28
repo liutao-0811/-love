@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-privacy {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $space-lg;
+}
+
+.section {
+  margin-bottom: $space-lg;
+
+  .section-title {
+    font-size: $font-md;
+    font-weight: 600;
+    display: block;
+    margin-bottom: $space-md;
+  }
+}
+
+.card {
+  @include card;
+
+  .card-text {
+    font-size: $font-base;
+    line-height: 1.8;
+    color: $color-text-main;
+  }
+
+  .item {
+    font-size: $font-sm;
+    line-height: 2;
+    color: $color-text-sub;
+  }
+
+  .menu-item {
+    @include flex-between;
+    padding: $space-sm 0;
+
+    .arrow { color: $color-text-light; font-size: $font-lg; }
+  }
+}
+
+.footer {
+  text-align: center;
+  padding: $space-xl 0;
+  font-size: $font-xs;
+  color: $color-text-light;
+  line-height: 2;
+}

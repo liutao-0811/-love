@@ -1,0 +1,179 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-countdown {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.header {
+  @include flex-between;
+  padding: $space-lg;
+
+  .title { font-size: $font-xl; font-weight: 700; }
+
+  .add-btn {
+    background: $color-primary;
+    color: #fff;
+    padding: $space-sm $space-lg;
+    border-radius: $radius-full;
+    font-size: $font-sm;
+    font-weight: 600;
+  }
+}
+
+.list-area {
+  padding: 0 $space-lg;
+  box-sizing: border-box;
+}
+
+.cd-card {
+  @include card;
+  display: flex;
+  align-items: center;
+  margin-bottom: $space-md;
+  position: relative;
+
+  .cd-left {
+    text-align: center;
+    margin-right: $space-lg;
+    min-width: 120rpx;
+
+    .cd-days {
+      font-size: $font-xxl;
+      font-weight: 300;
+      color: $color-primary;
+      display: block;
+      line-height: 1;
+    }
+
+    .cd-unit {
+      font-size: $font-xs;
+      color: $color-text-sub;
+      margin-top: 4rpx;
+    }
+  }
+
+  .cd-right {
+    flex: 1;
+
+    .cd-name {
+      font-size: $font-md;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4rpx;
+    }
+
+    .cd-date {
+      font-size: $font-sm;
+      color: $color-text-sub;
+      display: block;
+      margin-bottom: 4rpx;
+    }
+
+    .cd-type {
+      font-size: $font-xs;
+      color: $color-secondary;
+      background: rgba(181, 196, 177, 0.15);
+      padding: 2rpx 12rpx;
+      border-radius: $radius-full;
+      display: inline-block;
+    }
+  }
+
+  .cd-delete {
+    position: absolute;
+    top: $space-sm;
+    right: $space-sm;
+    width: 40rpx;
+    height: 40rpx;
+    @include flex-center;
+    color: $color-text-light;
+    font-size: $font-md;
+  }
+}
+
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  padding: 120rpx 0;
+
+  .empty-icon { font-size: 96rpx; margin-bottom: $space-lg; opacity: 0.6; }
+  .empty-text { font-size: $font-lg; font-weight: 600; margin-bottom: $space-sm; }
+  .empty-desc { font-size: $font-sm; color: $color-text-sub; }
+}
+
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  @include flex-center;
+
+  .modal-panel {
+    width: 85%;
+    background: $color-card;
+    border-radius: $radius-lg;
+    padding: $space-lg;
+
+    .modal-header {
+      @include flex-between;
+      margin-bottom: $space-lg;
+
+      .modal-title { font-size: $font-md; font-weight: 600; }
+      .modal-close {
+        width: 48rpx;
+        height: 48rpx;
+        @include flex-center;
+        font-size: $font-lg;
+        color: $color-text-light;
+        border-radius: 50%;
+        background: $color-bg;
+      }
+    }
+
+    .modal-input {
+      border-bottom: 2rpx solid $color-border;
+      padding: $space-md 0;
+      font-size: $font-md;
+      margin-bottom: $space-lg;
+    }
+
+    .date-row {
+      @include flex-between;
+      padding: $space-md 0;
+      margin-bottom: $space-md;
+      border-bottom: 2rpx solid $color-border;
+
+      .date-val { color: $color-primary; font-weight: 600; }
+    }
+
+    .custom-input {
+      margin-top: -#{$space-sm};
+      margin-bottom: $space-lg;
+    }
+
+    .type-row {
+      display: flex;
+      gap: $space-sm;
+      flex-wrap: wrap;
+      margin-bottom: $space-md;
+
+      .type-opt {
+        padding: $space-xs $space-md;
+        border-radius: $radius-full;
+        background: $color-primary-light;
+        font-size: $font-sm;
+
+        &.active { background: $color-primary; color: #fff; }
+      }
+    }
+
+    .modal-btn {
+      background: $color-primary !important;
+      color: #fff !important;
+      border-radius: $radius-full !important;
+      border: none !important;
+    }
+  }
+}

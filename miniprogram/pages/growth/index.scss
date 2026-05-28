@@ -1,0 +1,499 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-growth {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.header {
+  @include flex-between;
+  padding: $space-lg;
+
+  .title { font-size: $font-xl; font-weight: 700; }
+
+  .points-badge {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #fff;
+    padding: $space-xs $space-md;
+    border-radius: $radius-full;
+    font-size: $font-sm;
+    font-weight: 600;
+  }
+}
+
+.content {
+  padding: 0 $space-lg;
+  box-sizing: border-box;
+}
+
+// ========== 爱的签到 ==========
+.checkin-section {
+  @include card;
+  margin-bottom: $space-lg;
+  background: linear-gradient(145deg, #fff5f7, #fff);
+
+  .checkin-hero {
+    text-align: center;
+    padding-bottom: $space-md;
+    border-bottom: 1rpx solid $color-border;
+    margin-bottom: $space-md;
+
+    .checkin-slogan { font-size: $font-md; font-weight: 700; display: block; margin-bottom: 4rpx; }
+    .checkin-sub { font-size: $font-xs; color: $color-text-sub; }
+  }
+
+  .month-nav {
+    @include flex-between;
+    margin-bottom: $space-md;
+
+    .month-label { font-size: $font-md; font-weight: 700; color: $color-primary; }
+
+    .nav-arrow {
+      width: 52rpx; height: 52rpx;
+      @include flex-center;
+      font-size: $font-base;
+      color: $color-primary;
+      background: rgba(232,165,152,0.15);
+      border-radius: 50%;
+
+      &.disabled { color: $color-text-light; background: $color-bg; }
+    }
+  }
+
+  .week-header {
+    display: flex;
+    margin-bottom: $space-sm;
+
+    .wh-item {
+      flex: 1;
+      text-align: center;
+      font-size: $font-xs;
+      color: $color-text-sub;
+    }
+  }
+
+  .month-grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    .day-cell {
+      width: calc(100% / 7);
+      aspect-ratio: 1;
+      @include flex-center;
+      flex-direction: column;
+      border-radius: $radius-sm;
+      position: relative;
+      transition: all 0.2s;
+
+      &.empty { background: transparent; }
+
+      &.future .day-num { color: $color-text-light; }
+
+      &.today {
+        border: 2rpx solid $color-primary;
+        .day-num { color: $color-primary; font-weight: 700; }
+      }
+
+      &.my-only { background: rgba(233, 165, 152, 0.25); }
+      &.partner-only { background: rgba(181, 196, 177, 0.25); }
+      &.both { background: rgba(233, 165, 152, 0.4); }
+
+      .day-num { font-size: $font-sm; line-height: 1; }
+      .day-heart { font-size: 28rpx; line-height: 1; }
+    }
+  }
+
+  .checkin-footer {
+    margin-top: $space-md;
+    border-top: 1rpx solid $color-border;
+    padding-top: $space-md;
+    @include flex-between;
+
+    .checkin-stats {
+      display: flex;
+      align-items: center;
+      gap: $space-sm;
+
+      .stat-item { font-size: $font-xs; color: $color-text-sub; }
+      .stat-sep { color: $color-text-light; }
+    }
+
+    .checkin-btn {
+      background: $color-primary;
+      color: #fff;
+      padding: $space-sm $space-lg;
+      border-radius: $radius-full;
+      font-size: $font-sm;
+      font-weight: 600;
+
+      &.done {
+        background: $color-secondary;
+      }
+    }
+  }
+}
+
+// ========== 周历条 ==========
+.section {
+  @include card;
+  margin-bottom: $space-lg;
+
+  .section-header {
+    @include flex-between;
+    margin-bottom: $space-md;
+
+    .section-title { font-size: $font-md; font-weight: 600; }
+    .completed-count { font-size: $font-sm; color: $color-text-sub; }
+  }
+}
+
+.task-date-nav {
+  @include flex-between;
+  margin-bottom: $space-md;
+
+  .week-label { font-size: $font-sm; color: $color-text-sub; font-weight: 500; }
+
+  .arrow-btn {
+    width: 52rpx; height: 52rpx;
+    @include flex-center;
+    font-size: $font-xl;
+    color: $color-primary;
+    border-radius: 50%;
+    background: rgba(232,165,152,0.12);
+
+    &.disabled { color: $color-text-light; background: $color-bg; }
+  }
+}
+
+.week-strip {
+  display: flex;
+  justify-content: space-between;
+
+  .strip-day {
+    flex: 1;
+    @include flex-center;
+    flex-direction: column;
+    padding: $space-sm 0;
+    border-radius: $radius-md;
+    transition: all 0.2s;
+
+    &.today .strip-num { color: $color-primary; font-weight: 700; }
+
+    &.active {
+      background: $color-primary;
+      .strip-week, .strip-num { color: #fff !important; font-weight: 700; }
+      .strip-dot { border-color: rgba(255,255,255,0.5); background: transparent; }
+      .strip-dot.filled { background: #fff; border-color: #fff; box-shadow: none; }
+    }
+
+    &.future { opacity: 0.3; }
+
+    .strip-week { font-size: $font-xs; color: $color-text-light; margin-bottom: 4rpx; }
+    .strip-num { font-size: $font-md; font-weight: 500; color: $color-text-main; margin-bottom: 6rpx; }
+
+    .strip-dot {
+      width: 16rpx;
+      height: 16rpx;
+      border-radius: 50%;
+      border: 2rpx solid $color-border;
+      background: transparent;
+      transition: all 0.2s;
+
+      &.filled {
+        background: $color-secondary;
+        border-color: $color-secondary;
+        box-shadow: 0 0 6rpx rgba(181, 196, 177, 0.6);
+      }
+    }
+  }
+}
+
+// ========== 双栏任务 ==========
+.dual-section {
+  display: flex;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+
+  .dual-col {
+    flex: 1;
+    background: $color-card;
+    border-radius: $radius-md;
+    padding: $space-md;
+    box-shadow: $shadow-card;
+
+    &.my-col { border-top: 4rpx solid $color-primary; }
+    &.partner-col { border-top: 4rpx solid $color-secondary; }
+  }
+
+  .dual-header {
+    @include flex-between;
+    margin-bottom: $space-md;
+
+    .dual-title { font-size: $font-sm; font-weight: 600; }
+    .dual-count { font-size: $font-xs; color: $color-text-sub; }
+  }
+
+  .task-list {
+    .task-item {
+      padding: $space-sm 0;
+      border-bottom: 1rpx solid $color-border;
+
+      &:last-child { border-bottom: none; }
+      &.readonly { @include flex-between; }
+
+      .task-name-row {
+        display: flex;
+        align-items: center;
+        gap: 6rpx;
+        margin-bottom: 4rpx;
+        flex-wrap: wrap;
+      }
+
+      .task-name { font-size: $font-xs; color: $color-text-main; flex: 1; }
+      .partner-heart { font-size: 32rpx; }
+
+      .duration-tag {
+        font-size: 18rpx;
+        padding: 1rpx 8rpx;
+        border-radius: $radius-full;
+        flex-shrink: 0;
+
+        &.once { background: rgba(232,165,152,0.15); color: $color-primary; }
+        &.daily { background: rgba(181,196,177,0.2); color: $color-secondary; }
+      }
+
+      .heart-btn {
+        @include flex-center;
+        font-size: 40rpx;
+        padding: 4rpx 0;
+        transition: transform 0.2s;
+
+        &:active { transform: scale(1.3); }
+        &.done { animation: heartPop 0.35s ease; }
+        &.readonly { opacity: 0.4; }
+      }
+    }
+  }
+
+  .empty-col {
+    text-align: center;
+    padding: $space-md 0;
+    font-size: $font-xs;
+    color: $color-text-light;
+  }
+
+  .add-task-btn {
+    text-align: center;
+    padding: $space-sm 0 0;
+    color: $color-primary;
+    font-size: $font-xs;
+    font-weight: 600;
+  }
+}
+
+// ========== 打卡记录 ==========
+.records-section {
+  @include card;
+  margin-bottom: $space-lg;
+
+  .records-title {
+    font-size: $font-sm;
+    font-weight: 600;
+    display: block;
+    margin-bottom: $space-md;
+  }
+
+  .records-label {
+    font-size: $font-xs;
+    color: $color-text-sub;
+    font-weight: 600;
+    padding: $space-xs 0;
+    border-left: 4rpx solid $color-primary;
+    padding-left: $space-sm;
+    margin-bottom: $space-sm;
+    margin-top: $space-sm;
+  }
+
+  .record-row {
+    display: flex;
+    align-items: center;
+    padding: $space-md 0;
+    border-bottom: 1rpx solid $color-border;
+
+    &:last-child { border-bottom: none; }
+
+    .record-avatar-col {
+      width: 72rpx;
+      flex-shrink: 0;
+
+      .record-who {
+        font-size: $font-xs;
+        color: $color-text-sub;
+        background: $color-primary-light;
+        padding: 2rpx 10rpx;
+        border-radius: $radius-full;
+      }
+    }
+
+    .record-info {
+      flex: 1;
+      @include flex-between;
+
+      .record-name { font-size: $font-sm; color: $color-text-main; }
+      .record-time { font-size: $font-xs; color: $color-text-sub; }
+    }
+
+    .record-empty {
+      flex: 1;
+      font-size: $font-xs;
+      color: $color-text-light;
+    }
+  }
+}
+
+// ========== 奖励商城 ==========
+.add-task-btn {
+  text-align: center;
+  padding: $space-md;
+  color: $color-primary;
+  font-size: $font-sm;
+  font-weight: 600;
+  margin-top: $space-sm;
+}
+
+.rewards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-md;
+
+  .reward-item {
+    width: calc(50% - #{$space-sm});
+    background: $color-bg;
+    border-radius: $radius-md;
+    padding: $space-md;
+    text-align: center;
+
+    .reward-icon { font-size: 48rpx; display: block; margin-bottom: $space-xs; }
+    .reward-title { font-size: $font-sm; display: block; margin-bottom: 4rpx; }
+    .reward-cost { font-size: $font-xs; color: #FFA500; display: block; margin-bottom: $space-sm; }
+
+    .exchange-btn {
+      font-size: $font-xs !important;
+      background: $color-primary !important;
+      color: #fff !important;
+      border-radius: $radius-full !important;
+      padding: 0 $space-md !important;
+      height: 56rpx; line-height: 56rpx;
+      border: none !important;
+    }
+  }
+}
+
+.empty-tasks, .empty-rewards {
+  text-align: center;
+  padding: $space-lg;
+  color: $color-text-light;
+  font-size: $font-sm;
+}
+
+// ========== 弹窗 ==========
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  @include flex-center;
+
+  .modal-panel {
+    width: 85%;
+    background: $color-card;
+    border-radius: $radius-lg;
+    padding: $space-lg;
+
+    .modal-header {
+      @include flex-between;
+      margin-bottom: $space-lg;
+
+      .modal-title { font-size: $font-md; font-weight: 600; }
+      .modal-close {
+        width: 48rpx; height: 48rpx;
+        @include flex-center;
+        font-size: $font-lg;
+        color: $color-text-light;
+        border-radius: 50%;
+        background: $color-bg;
+      }
+    }
+
+    .modal-input {
+      border-bottom: 2rpx solid $color-border;
+      padding: $space-md 0;
+      font-size: $font-md;
+      margin-bottom: $space-lg;
+    }
+
+    .type-select-row {
+      margin-bottom: $space-lg;
+
+      .row-label { font-size: $font-sm; color: $color-text-sub; display: block; margin-bottom: $space-sm; }
+
+      .type-tabs {
+        display: flex;
+        gap: $space-md;
+
+        .type-tab {
+          flex: 1;
+          border: 2rpx solid $color-border;
+          border-radius: $radius-md;
+          padding: $space-md;
+          text-align: center;
+          transition: all 0.2s;
+
+          .tab-icon { font-size: 40rpx; display: block; margin-bottom: 4rpx; }
+          .tab-text { font-size: $font-sm; font-weight: 600; display: block; }
+          .tab-desc { font-size: $font-xs; color: $color-text-light; display: block; }
+
+          &.active {
+            border-color: $color-primary;
+            background: rgba(232,165,152,0.1);
+            .tab-text { color: $color-primary; }
+          }
+        }
+      }
+    }
+
+    .points-row {
+      margin-bottom: $space-lg;
+
+      .points-options {
+        display: flex;
+        gap: $space-sm;
+        margin-top: $space-sm;
+
+        .points-opt {
+          padding: $space-xs $space-md;
+          border-radius: $radius-full;
+          background: $color-primary-light;
+          font-size: $font-sm;
+
+          &.active { background: $color-primary; color: #fff; }
+        }
+      }
+    }
+
+    .modal-btn {
+      background: $color-primary !important;
+      color: #fff !important;
+      border-radius: $radius-full !important;
+      border: none !important;
+    }
+  }
+}
+
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.5); }
+  60%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}

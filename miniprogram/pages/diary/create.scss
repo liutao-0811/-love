@@ -1,0 +1,133 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-create {
+  min-height: 100vh;
+  background: $color-bg;
+  padding-bottom: 160rpx;
+}
+
+.form-section {
+  padding: $space-lg;
+  
+  .date-picker, .location-row {
+    @include flex-between;
+    @include card;
+    margin-bottom: $space-md;
+    padding: $space-md $space-lg;
+    
+    .label { font-size: $font-base; }
+    .value { font-size: $font-base; color: $color-text-sub; }
+  }
+  
+  .mood-picker {
+    @include card;
+    margin-bottom: $space-md;
+    
+    .label {
+      font-size: $font-base;
+      display: block;
+      margin-bottom: $space-md;
+    }
+    
+    .mood-options {
+      display: flex;
+      gap: $space-sm;
+      flex-wrap: wrap;
+      
+      .mood-item {
+        padding: $space-xs $space-md;
+        border-radius: $radius-full;
+        background: $color-primary-light;
+        font-size: $font-sm;
+        transition: all 0.2s;
+        
+        &.active {
+          background: $color-primary;
+          color: #fff;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+  
+  .content-input {
+    @include card;
+    width: 100%;
+    min-height: 300rpx;
+    font-size: $font-base;
+    line-height: 1.8;
+    margin-bottom: $space-md;
+  }
+  
+  .image-upload {
+    margin-bottom: $space-md;
+    
+    .image-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $space-sm;
+      
+      .img-item {
+        position: relative;
+        width: 200rpx;
+        height: 200rpx;
+        
+        image {
+          width: 100%;
+          height: 100%;
+          border-radius: $radius-sm;
+        }
+        
+        .remove-btn {
+          position: absolute;
+          top: -12rpx;
+          right: -12rpx;
+          width: 40rpx;
+          height: 40rpx;
+          background: rgba(0,0,0,0.6);
+          color: #fff;
+          border-radius: 50%;
+          @include flex-center;
+          font-size: $font-sm;
+        }
+      }
+      
+      .add-img {
+        width: 200rpx;
+        height: 200rpx;
+        border: 2rpx dashed $color-text-light;
+        border-radius: $radius-sm;
+        @include flex-center;
+        font-size: 64rpx;
+        color: $color-text-light;
+      }
+    }
+  }
+}
+
+.submit-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: $space-lg;
+  padding-bottom: calc(#{$space-lg} + constant(safe-area-inset-bottom));
+  padding-bottom: calc(#{$space-lg} + env(safe-area-inset-bottom));
+  background: $color-bg;
+  
+  .submit-btn {
+    background: $color-primary !important;
+    color: #fff !important;
+    border-radius: $radius-full !important;
+    font-size: $font-md !important;
+    font-weight: 600 !important;
+    height: 96rpx;
+    line-height: 96rpx;
+    border: none !important;
+    
+    &[disabled] {
+      opacity: 0.5;
+    }
+  }
+}

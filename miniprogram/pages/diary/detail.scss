@@ -1,0 +1,219 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-detail {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $space-lg;
+  padding-bottom: 160rpx;
+}
+
+.detail-header {
+  @include flex-between;
+  margin-bottom: $space-lg;
+
+  .date { font-size: $font-md; font-weight: 600; color: $color-text-sub; }
+  .mood { font-size: $font-xl; }
+}
+
+.detail-content {
+  @include card;
+  font-size: $font-base;
+  line-height: 2;
+  white-space: pre-wrap;
+  margin-bottom: $space-lg;
+}
+
+.detail-images {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+
+  .detail-img {
+    width: 100%;
+    border-radius: $radius-md;
+  }
+}
+
+.detail-location {
+  font-size: $font-sm;
+  color: $color-text-light;
+  margin-bottom: $space-lg;
+}
+
+// ========== 点赞 ==========
+.like-bar {
+  @include flex-between;
+  padding: $space-md $space-lg;
+  background: $color-card;
+  border-radius: $radius-md;
+  margin-bottom: $space-lg;
+  box-shadow: $shadow-card;
+
+  .like-btn {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    padding: $space-sm $space-md;
+    border-radius: $radius-full;
+    background: $color-bg;
+    transition: all 0.2s;
+
+    &:active { transform: scale(0.95); }
+
+    &.liked {
+      background: rgba(233, 165, 152, 0.12);
+      animation: heartPop 0.3s ease;
+    }
+
+    .like-icon { font-size: 40rpx; }
+    .like-count { font-size: $font-sm; color: $color-primary; font-weight: 600; }
+  }
+
+  .like-tip {
+    font-size: $font-xs;
+    color: $color-primary;
+  }
+}
+
+// ========== 评论区 ==========
+.comments-section {
+  @include card;
+  margin-bottom: $space-lg;
+
+  .comments-title {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    margin-bottom: $space-md;
+    font-size: $font-md;
+    font-weight: 600;
+
+    .comment-count {
+      background: $color-primary;
+      color: #fff;
+      font-size: $font-xs;
+      font-weight: 600;
+      padding: 2rpx 12rpx;
+      border-radius: $radius-full;
+    }
+  }
+
+  .comment-list {
+    .comment-item {
+      display: flex;
+      gap: $space-md;
+      padding: $space-md 0;
+      border-top: 1rpx solid $color-border;
+
+      .comment-avatar {
+        width: 64rpx;
+        height: 64rpx;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .comment-body {
+        flex: 1;
+
+        .comment-name {
+          font-size: $font-sm;
+          font-weight: 600;
+          color: $color-primary;
+          display: block;
+          margin-bottom: 4rpx;
+        }
+
+        .comment-content {
+          font-size: $font-base;
+          color: $color-text-main;
+          line-height: 1.6;
+          display: block;
+          margin-bottom: 4rpx;
+        }
+
+        .comment-time {
+          font-size: $font-xs;
+          color: $color-text-light;
+        }
+      }
+    }
+  }
+
+  .empty-comment {
+    text-align: center;
+    padding: $space-lg 0;
+    font-size: $font-sm;
+    color: $color-text-light;
+  }
+}
+
+// ========== 删除按钮 ==========
+.detail-actions {
+  text-align: center;
+  padding: $space-lg 0;
+
+  .delete-btn {
+    background: transparent !important;
+    color: $color-text-light !important;
+    font-size: $font-sm !important;
+    border: 2rpx solid $color-border !important;
+    border-radius: $radius-full !important;
+  }
+}
+
+// ========== 底部评论输入栏 ==========
+.comment-input-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-md $space-lg;
+  padding-bottom: calc(env(safe-area-inset-bottom) + #{$space-md});
+  background: $color-card;
+  border-top: 1rpx solid $color-border;
+  box-shadow: 0 -4rpx 20rpx rgba(0,0,0,0.06);
+  z-index: 100;
+
+  .comment-input {
+    flex: 1;
+    background: $color-bg;
+    border-radius: $radius-full;
+    padding: $space-sm $space-lg;
+    font-size: $font-sm;
+    height: 72rpx;
+  }
+
+  .send-btn {
+    flex-shrink: 0;
+    padding: $space-sm $space-lg;
+    border-radius: $radius-full;
+    background: $color-border;
+    color: $color-text-light;
+    font-size: $font-sm;
+    font-weight: 600;
+    transition: all 0.2s;
+
+    &.active {
+      background: $color-primary;
+      color: #fff;
+    }
+  }
+}
+
+.loading-state {
+  @include flex-center;
+  height: 60vh;
+  color: $color-text-light;
+}
+
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.4); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}

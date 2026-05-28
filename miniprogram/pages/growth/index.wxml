@@ -1,0 +1,177 @@
+<view class="page-growth">
+  <view class="header" style="padding-top: {{headerPaddingTop}}px; padding-right: {{headerPaddingRight}}px;">
+    <text class="title">爱的成长</text>
+    <view class="points-badge">
+      <text>⭐ {{myPoints}}</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="content">
+
+    <!-- 任务打卡区 -->
+    <view class="section fade-in" style="animation-delay: 0.05s;">
+      <view class="task-date-nav">
+        <view class="arrow-btn" bindtap="prevWeek">‹</view>
+        <text class="week-label">{{weekLabel}}</text>
+        <view class="arrow-btn {{isCurrentWeek ? 'disabled' : ''}}" bindtap="nextWeek">›</view>
+      </view>
+      <view class="week-strip">
+        <view
+          wx:for="{{weekDays}}"
+          wx:key="dateStr"
+          class="strip-day {{item.dateStr === selectedDate ? 'active' : ''}} {{item.isToday ? 'today' : ''}} {{item.isFuture ? 'future' : ''}}"
+          bindtap="selectDay"
+          data-date="{{item.dateStr}}"
+          data-future="{{item.isFuture}}"
+        >
+          <text class="strip-week">{{item.weekLabel}}</text>
+          <text class="strip-num">{{item.day}}</text>
+          <view class="strip-dot {{item.hasCheckin ? 'filled' : ''}}"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 双栏打卡展示 -->
+    <view class="dual-section fade-in" style="animation-delay: 0.1s;">
+      <!-- 我的打卡 -->
+      <view class="dual-col my-col">
+        <view class="dual-header">
+          <text class="dual-title">我的打卡</text>
+          <text class="dual-count">{{completedCount}}/{{tasks.length}}</text>
+        </view>
+        <view class="task-list">
+          <view class="task-item" wx:for="{{tasks}}" wx:key="_id">
+            <view class="task-name-row">
+              <text class="task-name">{{item.title}}</text>
+              <text class="duration-tag {{item.duration === 'once' ? 'once' : 'daily'}}">{{item.duration === 'once' ? '当日' : '每日'}}</text>
+            </view>
+            <view
+              class="heart-btn {{item.myCompleted ? 'done' : ''}} {{(!isToday && !item.myCompleted) ? 'readonly' : ''}}"
+              bindtap="checkIn"
+              data-id="{{item._id}}"
+            >
+              <text>{{item.myCompleted ? '🩷' : '🤍'}}</text>
+            </view>
+          </view>
+          <view wx:if="{{tasks.length === 0}}" class="empty-col">
+            <text>暂无任务</text>
+          </view>
+        </view>
+        <view wx:if="{{isToday}}" class="add-task-btn" bindtap="showAddTask">+ 添加</view>
+      </view>
+
+      <!-- TA的打卡 -->
+      <view class="dual-col partner-col">
+        <view class="dual-header">
+          <text class="dual-title">{{partnerName}}的打卡</text>
+          <text class="dual-count">{{partnerCompletedCount}}/{{partnerTasks.length}}</text>
+        </view>
+        <view class="task-list">
+          <view class="task-item readonly" wx:for="{{partnerTasks}}" wx:key="_id">
+            <text class="task-name">{{item.title}}</text>
+            <text class="partner-heart">{{item.myCompleted ? '🩷' : '🤍'}}</text>
+          </view>
+          <view wx:if="{{partnerTasks.length === 0}}" class="empty-col">
+            <text>暂无任务</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 当日打卡记录 -->
+    <view class="records-section fade-in" style="animation-delay: 0.15s;">
+      <text class="records-title">{{selectedDate}} 打卡记录</text>
+
+      <view class="record-row">
+        <view class="record-avatar-col">
+          <text class="record-who">我</text>
+        </view>
+        <view wx:if="{{dayRecords.myRecords && dayRecords.myRecords.length > 0}}" class="record-info">
+          <text class="record-name">🩷 最近一次打卡</text>
+          <text class="record-time">🕐 {{dayRecords.myRecords[0].timeStr}}</text>
+        </view>
+        <view wx:else class="record-empty">
+          <text>暂未打卡哦，快去完成吧！</text>
+        </view>
+      </view>
+
+      <view class="record-row">
+        <view class="record-avatar-col">
+          <text class="record-who">{{partnerName}}</text>
+        </view>
+        <view wx:if="{{dayRecords.partnerRecords && dayRecords.partnerRecords.length > 0}}" class="record-info">
+          <text class="record-name">🩷 最近一次打卡</text>
+          <text class="record-time">🕐 {{dayRecords.partnerRecords[0].timeStr}}</text>
+        </view>
+        <view wx:else class="record-empty">
+          <text>暂未打卡哦，快去完成吧！</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 奖励兑换 -->
+    <view class="section fade-in" style="animation-delay: 0.2s;">
+      <view class="section-header">
+        <text class="section-title">奖励兑换</text>
+      </view>
+      <view class="rewards-grid">
+        <view class="reward-item" wx:for="{{rewards}}" wx:key="_id">
+          <text class="reward-icon">🎁</text>
+          <text class="reward-title">{{item.title}}</text>
+          <text class="reward-cost">{{item.cost}} 积分</text>
+          <button class="exchange-btn" bindtap="exchange" data-id="{{item._id}}" data-cost="{{item.cost}}">兑换</button>
+        </view>
+      </view>
+      <view wx:if="{{rewards.length === 0}}" class="empty-rewards"><text>还没有奖励，快去设置吧</text></view>
+      <view class="add-task-btn" bindtap="showAddReward">+ 添加新奖励</view>
+    </view>
+
+    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- 添加任务弹窗 -->
+  <view class="modal-mask" wx:if="{{showTaskModal}}">
+    <view class="modal-panel" catchtap="noop">
+      <view class="modal-header">
+        <text class="modal-title">新建任务</text>
+        <view class="modal-close" catchtap="hideAddTask">×</view>
+      </view>
+      <input class="modal-input" placeholder="任务名称" value="{{newTaskTitle}}" bindinput="onTaskTitleInput" />
+      <view class="type-select-row">
+        <text class="row-label">任务类型：</text>
+        <view class="type-tabs">
+          <view class="type-tab {{newTaskDuration === 'once' ? 'active' : ''}}" catchtap="selectDuration" data-val="once">
+            <text class="tab-icon">📅</text>
+            <text class="tab-text">当日有效</text>
+            <text class="tab-desc">仅今天</text>
+          </view>
+          <view class="type-tab {{newTaskDuration === 'daily' ? 'active' : ''}}" catchtap="selectDuration" data-val="daily">
+            <text class="tab-icon">🔁</text>
+            <text class="tab-text">长期任务</text>
+            <text class="tab-desc">每天都有</text>
+          </view>
+        </view>
+      </view>
+      <view class="points-row">
+        <text>完成奖励：</text>
+        <view class="points-options">
+          <view wx:for="{{[1,3,5,10]}}" wx:key="*this" class="points-opt {{newTaskPoints === item ? 'active' : ''}}" catchtap="selectPoints" data-val="{{item}}">+{{item}}</view>
+        </view>
+      </view>
+      <button class="modal-btn" catchtap="addTask" loading="{{taskSubmitting}}" disabled="{{!newTaskTitle || taskSubmitting}}">创建任务</button>
+    </view>
+  </view>
+
+  <!-- 添加奖励弹窗 -->
+  <view class="modal-mask" wx:if="{{showRewardModal}}">
+    <view class="modal-panel" catchtap="noop">
+      <view class="modal-header">
+        <text class="modal-title">添加奖励</text>
+        <view class="modal-close" catchtap="hideAddReward">×</view>
+      </view>
+      <input class="modal-input" placeholder="奖励名称（如：一杯奶茶）" value="{{newRewardTitle}}" bindinput="onRewardTitleInput" />
+      <input class="modal-input" type="number" placeholder="所需积分" value="{{newRewardCost}}" bindinput="onRewardCostInput" />
+      <button class="modal-btn" catchtap="addReward" loading="{{rewardSubmitting}}" disabled="{{!newRewardTitle || !newRewardCost || rewardSubmitting}}">添加奖励</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+{
+  "users": [
+    { "fields": [{ "fieldPath": "_openid", "order": "asc" }], "unique": true },
+    { "fields": [{ "fieldPath": "coupleId", "order": "asc" }] }
+  ],
+  "couples": [
+    { "fields": [{ "fieldPath": "partner1Openid", "order": "asc" }] },
+    { "fields": [{ "fieldPath": "partner2Openid", "order": "asc" }] }
+  ],
+  "diaries": [
+    { "fields": [{ "fieldPath": "coupleId", "order": "asc" }, { "fieldPath": "date", "order": "desc" }] },
+    { "fields": [{ "fieldPath": "_openid", "order": "asc" }] }
+  ],
+  "notes": [
+    { "fields": [{ "fieldPath": "coupleId", "order": "asc" }, { "fieldPath": "isPinned", "order": "desc" }, { "fieldPath": "createdAt", "order": "desc" }] }
+  ],
+  "tasks": [
+    { "fields": [{ "fieldPath": "coupleId", "order": "asc" }] }
+  ],
+  "task_records": [
+    { "fields": [{ "fieldPath": "taskId", "order": "asc" }, { "fieldPath": "_openid", "order": "asc" }, { "fieldPath": "completedAt", "order": "desc" }] }
+  ],
+  "countdowns": [
+    { "fields": [{ "fieldPath": "coupleId", "order": "asc" }, { "fieldPath": "targetDate", "order": "asc" }] }
+  ],
+  "rewards": [
+    { "fields": [{ "fieldPath": "coupleId", "order": "asc" }] }
+  ],
+  "points_logs": [
+    { "fields": [{ "fieldPath": "_openid", "order": "asc" }, { "fieldPath": "createdAt", "order": "desc" }] }
+  ]
+}

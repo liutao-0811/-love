@@ -1,0 +1,73 @@
+<view class="page-profile">
+  <view class="profile-header" style="padding-top: {{statusBarHeight + 44}}px;">
+    <image class="avatar" src="{{userInfo.avatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+    <text class="nickname">{{userInfo.nickname || '未设置昵称'}}</text>
+    <view class="couple-tag" wx:if="{{coupleInfo}}">
+      <text>💕 {{coupleInfo.partner2.nickname || 'TA'}}</text>
+    </view>
+    <view class="couple-tag unbound" wx:else bindtap="goBind">
+      <text>+ 绑定情侣</text>
+    </view>
+  </view>
+
+  <view class="menu-list">
+    <view class="stats-row fade-in">
+      <view class="stat-item">
+        <text class="stat-val">{{myPoints}}</text>
+        <text class="stat-label">积分</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-val">{{daysTogether}}</text>
+        <text class="stat-label">天数</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-val">{{diaryCount}}</text>
+        <text class="stat-label">日记</text>
+      </view>
+    </view>
+
+    <view class="menu-group fade-in" style="animation-delay: 0.1s;">
+      <view class="menu-item" bindtap="goEditProfile">
+        <text class="menu-icon">👤</text>
+        <text class="menu-text">个人资料</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goBadges">
+        <text class="menu-icon">🏅</text>
+        <text class="menu-text">我的徽章</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goPointsLog">
+        <text class="menu-icon">📊</text>
+        <text class="menu-text">积分明细</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+
+    <view class="menu-group fade-in" style="animation-delay: 0.2s;">
+      <view class="menu-item" bindtap="goTheme">
+        <text class="menu-icon">🎨</text>
+        <text class="menu-text">主题设置</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goPrivacy">
+        <text class="menu-icon">🔒</text>
+        <text class="menu-text">隐私设置</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goAbout">
+        <text class="menu-icon">ℹ️</text>
+        <text class="menu-text">关于我们</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+    
+    <view class="version-info fade-in" style="animation-delay: 0.3s;">
+      <text>v1.0.0 · 用爱记录每一天</text>
+    </view>
+    
+    <view class="safe-bottom"></view>
+  </view>
+</view>

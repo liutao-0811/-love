@@ -1,0 +1,65 @@
+<view class="page-countdown">
+  <view class="header" style="padding-top: {{headerPaddingTop}}px; padding-right: {{headerPaddingRight}}px;">
+    <text class="title">重要日子</text>
+    <view class="add-btn" bindtap="showCreate">+ 新建</view>
+  </view>
+
+  <scroll-view scroll-y class="list-area" style="height: calc(100vh - {{headerHeight}}px);">
+    <block wx:if="{{countdowns.length > 0}}">
+      <view class="cd-card fade-in" wx:for="{{countdowns}}" wx:key="_id" style="animation-delay: {{index * 0.05}}s;">
+        <view class="cd-left">
+          <text class="cd-days">{{item.daysLeft}}</text>
+          <text class="cd-unit">{{item.daysLeft >= 0 ? '天' : '已过'}}</text>
+        </view>
+        <view class="cd-right">
+          <text class="cd-name">{{item.name}}</text>
+          <text class="cd-date">{{item.targetDate}}</text>
+          <text class="cd-type">{{item.customLabel || item.typeLabel}}</text>
+        </view>
+        <view class="cd-delete" catchtap="deleteCountdown" data-id="{{item._id}}">×</view>
+      </view>
+    </block>
+
+    <view wx:else class="empty-state">
+      <text class="empty-icon">⏳</text>
+      <text class="empty-text">还没有倒计时事件</text>
+      <text class="empty-desc">添加纪念日、生日、旅行计划吧</text>
+    </view>
+
+    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- 创建弹窗 -->
+  <view class="modal-mask" wx:if="{{showModal}}">
+    <view class="modal-panel" catchtap="noop">
+      <view class="modal-header">
+        <text class="modal-title">新建倒计时</text>
+        <view class="modal-close" catchtap="hideCreate">×</view>
+      </view>
+      <input class="modal-input" placeholder="事件名称" value="{{newName}}" bindinput="onNameInput" />
+      <picker mode="date" value="{{newDate}}" bindchange="onDateChange">
+        <view class="date-row">
+          <text>目标日期：</text>
+          <text class="date-val">{{newDate || '请选择'}}</text>
+        </view>
+      </picker>
+      <view class="type-row">
+        <view
+          wx:for="{{types}}"
+          wx:key="value"
+          class="type-opt {{newType === item.value ? 'active' : ''}}"
+          catchtap="selectType"
+          data-val="{{item.value}}"
+        >{{item.label}}</view>
+      </view>
+      <input
+        wx:if="{{newType === 'custom'}}"
+        class="modal-input custom-input"
+        placeholder="填写自定义类型名（如：求婚计划）"
+        value="{{newCustomLabel}}"
+        bindinput="onCustomLabelInput"
+      />
+      <button class="modal-btn" catchtap="createCountdown" loading="{{submitting}}" disabled="{{!newName || !newDate || submitting}}">创建</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,78 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-points {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.header {
+  padding: $space-lg;
+  padding-top: calc(env(safe-area-inset-top) + #{$space-lg});
+
+  .title {
+    font-size: $font-xl;
+    font-weight: 700;
+    display: block;
+    margin-bottom: $space-xs;
+  }
+
+  .total {
+    font-size: $font-sm;
+    color: $color-text-sub;
+  }
+}
+
+.log-list {
+  padding: 0 $space-lg;
+  box-sizing: border-box;
+}
+
+.log-item {
+  @include flex-between;
+  @include card;
+  margin-bottom: $space-sm;
+  padding: $space-md $space-lg;
+
+  .log-info {
+    flex: 1;
+
+    .log-source {
+      font-size: $font-base;
+      display: block;
+      margin-bottom: 4rpx;
+    }
+
+    .log-time {
+      font-size: $font-xs;
+      color: $color-text-light;
+    }
+  }
+
+  .log-amount {
+    font-size: $font-md;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-left: $space-md;
+
+    &.earn { color: $color-secondary; }
+    &.spend { color: $color-primary; }
+  }
+}
+
+.loading-more, .no-more {
+  text-align: center;
+  padding: $space-lg;
+  font-size: $font-sm;
+  color: $color-text-light;
+}
+
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  padding: 120rpx 0;
+
+  .empty-icon { font-size: 96rpx; margin-bottom: $space-lg; opacity: 0.6; }
+  .empty-text { font-size: $font-lg; font-weight: 600; margin-bottom: $space-sm; }
+  .empty-desc { font-size: $font-sm; color: $color-text-sub; }
+}

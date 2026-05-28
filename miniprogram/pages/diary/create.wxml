@@ -1,0 +1,55 @@
+<view class="page-create">
+  <view class="form-section">
+    <picker mode="date" value="{{date}}" bindchange="onDateChange">
+      <view class="date-picker">
+        <text class="label">📅 日期</text>
+        <text class="value">{{date}}</text>
+      </view>
+    </picker>
+    
+    <view class="mood-picker">
+      <text class="label">心情</text>
+      <view class="mood-options">
+        <view 
+          wx:for="{{moods}}" 
+          wx:key="*this"
+          class="mood-item {{mood === item ? 'active' : ''}}"
+          bindtap="selectMood"
+          data-mood="{{item}}"
+        >{{item}}</view>
+      </view>
+    </view>
+    
+    <textarea 
+      class="content-input" 
+      placeholder="今天发生了什么甜蜜的事？" 
+      maxlength="2000"
+      value="{{content}}"
+      bindinput="onContentInput"
+      auto-height
+    />
+    
+    <view class="image-upload">
+      <view class="image-list">
+        <view class="img-item" wx:for="{{images}}" wx:key="*this">
+          <image src="{{item}}" mode="aspectFill" />
+          <view class="remove-btn" catchtap="removeImage" data-index="{{index}}">×</view>
+        </view>
+        <view class="add-img" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+          <text>+</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="location-row" bindtap="chooseLocation">
+      <text class="label">📍 位置</text>
+      <text class="value">{{location.name || '点击添加位置'}}</text>
+    </view>
+  </view>
+  
+  <view class="submit-area safe-area">
+    <button class="submit-btn" bindtap="submit" loading="{{submitting}}" disabled="{{!content}}">
+      发布日记
+    </button>
+  </view>
+</view>

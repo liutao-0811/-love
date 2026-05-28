@@ -1,0 +1,59 @@
+<view class="page-bind">
+  <view class="bind-header fade-in" style="padding-top: {{headerPaddingTop}}px; padding-right: {{headerPaddingRight}}px;">
+    <text class="bind-icon">💕</text>
+    <text class="bind-title">建立你们的专属空间</text>
+    <text class="bind-desc">绑定后，你们可以共同记录日记、打卡任务、互传纸条</text>
+  </view>
+
+  <!-- 已绑定状态 -->
+  <view class="bound-card fade-in" wx:if="{{isBound}}" style="animation-delay: 0.1s;">
+    <view class="bound-avatars">
+      <image class="avatar" src="{{myAvatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+      <text class="heart">💖</text>
+      <image class="avatar" src="{{partnerAvatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+    </view>
+    <text class="bound-text">已与 {{partnerName}} 绑定</text>
+    <text class="bound-since">在一起 {{daysTogether}} 天</text>
+    <button class="unbind-btn" bindtap="confirmUnbind">解除绑定</button>
+  </view>
+
+  <!-- 未绑定状态 -->
+  <block wx:else>
+    <!-- 我的邀请码 -->
+    <view class="invite-section fade-in" style="animation-delay: 0.1s;">
+      <text class="section-title">Step 1 · 让对方添加你</text>
+      <view class="invite-card">
+        <text class="invite-label">你的邀请码</text>
+        <view class="invite-code-row">
+          <text class="invite-code">{{myOpenid}}</text>
+          <view class="copy-btn" bindtap="copyCode">复制</view>
+        </view>
+        <text class="invite-tip">将邀请码发送给 TA，让 TA 在下方输入</text>
+      </view>
+    </view>
+
+    <!-- 输入对方邀请码 -->
+    <view class="input-section fade-in" style="animation-delay: 0.2s;">
+      <text class="section-title">Step 2 · 输入 TA 的邀请码</text>
+      <view class="input-card">
+        <input 
+          class="code-input" 
+          placeholder="粘贴对方的邀请码" 
+          value="{{partnerCode}}"
+          bindinput="onCodeInput"
+          confirm-type="done"
+        />
+        <button 
+          class="bind-btn" 
+          bindtap="doBind" 
+          loading="{{binding}}" 
+          disabled="{{!partnerCode || binding}}"
+        >
+          立即绑定
+        </button>
+      </view>
+    </view>
+  </block>
+
+  <view class="safe-bottom"></view>
+</view>

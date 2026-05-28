@@ -1,0 +1,62 @@
+<view class="page-diary">
+  <view class="header" style="padding-top: {{headerPaddingTop}}px; padding-right: {{headerPaddingRight}}px;">
+    <text class="title">时光记录</text>
+    <view class="add-btn" bindtap="goCreate">
+      <text>+ 写日记</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="diary-list" style="height: calc(100vh - {{headerHeight}}px);" bindscrolltolower="loadMore">
+    <block wx:if="{{diaries.length > 0}}">
+      <view class="timeline">
+        <view class="timeline-item fade-in" wx:for="{{diaries}}" wx:key="_id" style="animation-delay: {{index * 0.05}}s;">
+          <view class="timeline-dot"></view>
+          <view class="timeline-line" wx:if="{{index < diaries.length - 1}}"></view>
+          
+          <view class="diary-card" bindtap="goDetail" data-id="{{item._id}}">
+            <view class="card-header">
+              <text class="date">{{item.date}}</text>
+              <text class="mood" wx:if="{{item.mood}}">{{item.mood}}</text>
+            </view>
+            
+            <text class="content">{{item.content}}</text>
+            
+            <view class="images" wx:if="{{item.images.length > 0}}">
+              <image 
+                wx:for="{{item.images}}" 
+                wx:for-item="img" 
+                wx:key="*this"
+                src="{{img}}" 
+                mode="aspectFill"
+                class="diary-img"
+                catchtap="previewImage"
+                data-urls="{{item.images}}"
+                data-current="{{img}}"
+              />
+            </view>
+            
+            <view class="location" wx:if="{{item.location}}">
+              <text>📍 {{item.location.name}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="loading-more" wx:if="{{loading}}">
+        <text>加载中...</text>
+      </view>
+      <view class="no-more" wx:if="{{noMore && diaries.length > 0}}">
+        <text>已经到底啦 ~</text>
+      </view>
+    </block>
+    
+    <view wx:else class="empty-state">
+      <text class="empty-icon">📔</text>
+      <text class="empty-title">还没有日记</text>
+      <text class="empty-desc">记录你们的第一个甜蜜瞬间吧</text>
+      <view class="empty-btn" bindtap="goCreate">开始写日记</view>
+    </view>
+    
+    <view class="safe-bottom"></view>
+  </scroll-view>
+</view>

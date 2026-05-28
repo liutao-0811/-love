@@ -1,0 +1,69 @@
+<view class="page-checkin">
+  <view class="hero">
+    <text class="slogan">💌 记录我们的甜蜜日常</text>
+    <text class="sub">"每一次签到，都是我们的小浪漫✨"</text>
+  </view>
+
+  <view class="calendar-card">
+    <view class="month-nav">
+      <view class="nav-arrow" bindtap="prevMonth">◀</view>
+      <text class="month-label">{{currentYear}}年{{currentMonth}}月</text>
+      <view class="nav-arrow {{isCurrentMonth ? 'disabled' : ''}}" bindtap="nextMonth">▶</view>
+    </view>
+
+    <view class="week-header">
+      <text wx:for="{{['日','一','二','三','四','五','六']}}" wx:key="*this" class="wh-item">{{item}}</text>
+    </view>
+
+    <view class="month-grid">
+      <view
+        wx:for="{{calendarDays || []}}"
+        wx:key="index"
+        class="day-cell {{item.empty ? 'empty' : ''}} {{item.isToday ? 'today' : ''}} {{item.isFuture ? 'future' : ''}} {{item.myCheckin && item.partnerCheckin ? 'both' : item.myCheckin ? 'my-only' : item.partnerCheckin ? 'partner-only' : ''}}"
+      >
+        <text wx:if="{{!item.empty}}" class="day-num">{{item.day}}</text>
+        <text wx:if="{{!item.empty && (item.myCheckin || item.partnerCheckin)}}" class="day-heart">🩷</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="stats-row">
+    <view class="stat-card my-stat">
+      <text class="stat-num">{{myCheckinCount}}</text>
+      <text class="stat-label">我的签到天数</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-card partner-stat">
+      <text class="stat-num">{{partnerCheckinCount}}</text>
+      <text class="stat-label">{{partnerName}}的签到天数</text>
+    </view>
+  </view>
+
+  <view class="legend-row">
+    <view class="legend-item">
+      <view class="legend-dot both"></view>
+      <text>双方同签</text>
+    </view>
+    <view class="legend-item">
+      <view class="legend-dot my-only"></view>
+      <text>我签到</text>
+    </view>
+    <view class="legend-item">
+      <view class="legend-dot partner-only"></view>
+      <text>TA签到</text>
+    </view>
+  </view>
+
+  <view class="checkin-action">
+    <view
+      class="checkin-btn {{todayCheckedIn ? 'done' : ''}}"
+      bindtap="doCheckin"
+    >
+      <text class="btn-text">{{todayCheckedIn ? '✅ 今日已签到' : '🩷 立即签到 +1积分'}}</text>
+    </view>
+    <text class="checkin-hint" wx:if="{{!todayCheckedIn}}">每天签到可获得 1 积分</text>
+    <text class="checkin-hint done-hint" wx:else>今天已完成签到，明天继续 💪</text>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

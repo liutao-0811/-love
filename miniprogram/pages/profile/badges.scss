@@ -1,0 +1,74 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-badges {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.header {
+  padding: $space-lg;
+  padding-top: calc(env(safe-area-inset-top) + #{$space-lg});
+
+  .title {
+    font-size: $font-xl;
+    font-weight: 700;
+    display: block;
+    margin-bottom: $space-xs;
+  }
+
+  .subtitle {
+    font-size: $font-sm;
+    color: $color-text-sub;
+  }
+}
+
+.badge-grid {
+  padding: 0 $space-lg;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-md;
+  align-content: flex-start;
+  box-sizing: border-box;
+}
+
+.badge-card {
+  width: calc(33.33% - #{$space-sm});
+  @include card;
+  @include flex-center;
+  flex-direction: column;
+  padding: $space-lg $space-sm;
+  text-align: center;
+  position: relative;
+  min-height: 240rpx;
+
+  &.locked {
+    opacity: 0.5;
+    filter: grayscale(1);
+  }
+
+  .badge-icon {
+    font-size: 56rpx;
+    margin-bottom: $space-sm;
+  }
+
+  .badge-name {
+    font-size: $font-sm;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4rpx;
+  }
+
+  .badge-desc {
+    font-size: $font-xs;
+    color: $color-text-sub;
+    line-height: 1.4;
+  }
+
+  .badge-lock {
+    position: absolute;
+    top: $space-sm;
+    right: $space-sm;
+    font-size: $font-xs;
+  }
+}

@@ -1,0 +1,82 @@
+<view class="page-detail" wx:if="{{diary}}">
+  <view class="detail-header">
+    <text class="date">{{diary.date}}</text>
+    <text class="mood" wx:if="{{diary.mood}}">{{diary.mood}}</text>
+  </view>
+
+  <view class="detail-content">
+    <text>{{diary.content}}</text>
+  </view>
+
+  <view class="detail-images" wx:if="{{diary.images && diary.images.length > 0}}">
+    <image
+      wx:for="{{diary.images}}"
+      wx:key="*this"
+      src="{{item}}"
+      mode="widthFix"
+      class="detail-img"
+      bindtap="previewImage"
+      data-current="{{item}}"
+    />
+  </view>
+
+  <view class="detail-location" wx:if="{{diary.location}}">
+    <text>📍 {{diary.location.name}}</text>
+  </view>
+
+  <!-- 点赞区 -->
+  <view class="like-bar">
+    <view class="like-btn {{liked ? 'liked' : ''}}" bindtap="toggleLike">
+      <text class="like-icon">{{liked ? '🩷' : '🤍'}}</text>
+      <text class="like-count">{{likeCount > 0 ? likeCount : ''}}</text>
+    </view>
+    <text class="like-tip" wx:if="{{liked}}">你喜欢这篇日记</text>
+  </view>
+
+  <!-- 评论区 -->
+  <view class="comments-section">
+    <view class="comments-title">
+      <text>💬 评论</text>
+      <text class="comment-count" wx:if="{{comments.length > 0}}">{{comments.length}}</text>
+    </view>
+
+    <view wx:if="{{comments.length > 0}}" class="comment-list">
+      <view class="comment-item" wx:for="{{comments}}" wx:key="_id">
+        <image class="comment-avatar" src="{{item.avatar || '/assets/default-avatar.png'}}" mode="aspectFill" />
+        <view class="comment-body">
+          <text class="comment-name">{{item.nickname}}</text>
+          <text class="comment-content">{{item.content}}</text>
+          <text class="comment-time">{{item.timeStr}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-comment">
+      <text>还没有评论，快来说点什么吧 💭</text>
+    </view>
+  </view>
+
+  <view class="detail-actions" wx:if="{{isOwner}}">
+    <button class="delete-btn" bindtap="deleteDiary">删除日记</button>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>
+
+<view class="loading-state" wx:else>
+  <text>加载中...</text>
+</view>
+
+<!-- 底部评论输入栏（固定底部） -->
+<view class="comment-input-bar" wx:if="{{diary}}">
+  <input
+    class="comment-input"
+    placeholder="写下你的感受..."
+    value="{{commentText}}"
+    bindinput="onCommentInput"
+    confirm-type="send"
+    bindconfirm="submitComment"
+    adjust-position="{{true}}"
+  />
+  <view class="send-btn {{commentText ? 'active' : ''}}" bindtap="submitComment">发送</view>
+</view>

@@ -1,0 +1,158 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-diary {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.header {
+  @include flex-between;
+  padding: $space-lg;
+  
+  .title {
+    font-size: $font-xl;
+    font-weight: 700;
+    color: $color-text-main;
+  }
+  
+  .add-btn {
+    background: $color-primary;
+    color: #fff;
+    padding: $space-sm $space-lg;
+    border-radius: $radius-full;
+    font-size: $font-sm;
+    font-weight: 600;
+    box-shadow: 0 4rpx 16rpx rgba(232, 165, 152, 0.4);
+    
+    &:active { transform: scale(0.95); }
+  }
+}
+
+.diary-list {
+  padding: 0 $space-lg;
+  box-sizing: border-box;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 40rpx;
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: $space-lg;
+    
+    .timeline-dot {
+      position: absolute;
+      left: -46rpx;
+      top: 32rpx;
+      width: 16rpx;
+      height: 16rpx;
+      border-radius: 50%;
+      background: $color-primary;
+      border: 4rpx solid $color-bg;
+      z-index: 1;
+    }
+    
+    .timeline-line {
+      position: absolute;
+      left: -40rpx;
+      top: 48rpx;
+      bottom: -$space-lg;
+      width: 4rpx;
+      background: $color-border;
+    }
+  }
+}
+
+.diary-card {
+  @include card;
+  transition: transform 0.2s ease;
+  
+  &:active { transform: scale(0.98); }
+  
+  .card-header {
+    @include flex-between;
+    margin-bottom: $space-sm;
+    
+    .date {
+      font-size: $font-sm;
+      color: $color-text-sub;
+      font-weight: 600;
+    }
+    
+    .mood {
+      font-size: $font-base;
+    }
+  }
+  
+  .content {
+    font-size: $font-base;
+    line-height: 1.8;
+    color: $color-text-main;
+    display: block;
+    margin-bottom: $space-md;
+    @include text-ellipsis(3);
+  }
+  
+  .images {
+    display: flex;
+    gap: $space-sm;
+    margin-bottom: $space-md;
+    overflow-x: auto;
+    
+    .diary-img {
+      width: 200rpx;
+      height: 200rpx;
+      border-radius: $radius-sm;
+      flex-shrink: 0;
+    }
+  }
+  
+  .location {
+    font-size: $font-xs;
+    color: $color-text-light;
+  }
+}
+
+.loading-more, .no-more {
+  text-align: center;
+  padding: $space-lg;
+  font-size: $font-sm;
+  color: $color-text-light;
+}
+
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  padding: 120rpx 0;
+  
+  .empty-icon {
+    font-size: 96rpx;
+    margin-bottom: $space-lg;
+    opacity: 0.6;
+  }
+  
+  .empty-title {
+    font-size: $font-lg;
+    font-weight: 600;
+    margin-bottom: $space-sm;
+  }
+  
+  .empty-desc {
+    font-size: $font-sm;
+    color: $color-text-sub;
+    margin-bottom: $space-xl;
+  }
+  
+  .empty-btn {
+    background: $color-primary;
+    color: #fff;
+    padding: $space-md $space-xl;
+    border-radius: $radius-full;
+    font-size: $font-base;
+    font-weight: 600;
+  }
+}
+
+

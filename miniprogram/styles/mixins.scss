@@ -1,0 +1,44 @@
+@import './variables.scss';
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin card {
+  background: $color-card;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  padding: $space-lg;
+}
+
+@mixin glass($blur: 20rpx) {
+  background: $color-glass;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    overflow: hidden;
+  }
+}
+
+@mixin safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}

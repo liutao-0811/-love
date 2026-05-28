@@ -1,0 +1,161 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-bind {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $space-lg;
+}
+
+.bind-header {
+  text-align: center;
+  padding: $space-xl 0;
+
+  .bind-icon {
+    font-size: 80rpx;
+    display: block;
+    margin-bottom: $space-md;
+  }
+
+  .bind-title {
+    font-size: $font-lg;
+    font-weight: 700;
+    display: block;
+    margin-bottom: $space-sm;
+  }
+
+  .bind-desc {
+    font-size: $font-sm;
+    color: $color-text-sub;
+    line-height: 1.6;
+  }
+}
+
+.bound-card {
+  @include card;
+  text-align: center;
+  padding: $space-xl;
+
+  .bound-avatars {
+    @include flex-center;
+    margin-bottom: $space-lg;
+
+    .avatar {
+      width: 120rpx;
+      height: 120rpx;
+      border-radius: 50%;
+      border: 4rpx solid $color-card;
+      box-shadow: $shadow-card;
+    }
+
+    .heart {
+      font-size: 40rpx;
+      margin: 0 $space-md;
+    }
+  }
+
+  .bound-text {
+    font-size: $font-md;
+    font-weight: 600;
+    display: block;
+    margin-bottom: $space-xs;
+  }
+
+  .bound-since {
+    font-size: $font-sm;
+    color: $color-text-sub;
+    display: block;
+    margin-bottom: $space-xl;
+  }
+
+  .unbind-btn {
+    background: transparent !important;
+    color: $color-text-light !important;
+    font-size: $font-sm !important;
+    border: 2rpx solid $color-border !important;
+    border-radius: $radius-full !important;
+  }
+}
+
+.section-title {
+  font-size: $font-base;
+  font-weight: 600;
+  display: block;
+  margin-bottom: $space-md;
+  color: $color-text-main;
+}
+
+.invite-section, .input-section {
+  margin-bottom: $space-lg;
+}
+
+.invite-card {
+  @include card;
+
+  .invite-label {
+    font-size: $font-sm;
+    color: $color-text-sub;
+    display: block;
+    margin-bottom: $space-sm;
+  }
+
+  .invite-code-row {
+    @include flex-between;
+    background: $color-bg;
+    border-radius: $radius-sm;
+    padding: $space-md;
+    margin-bottom: $space-md;
+
+    .invite-code {
+      font-size: $font-sm;
+      font-family: monospace;
+      word-break: break-all;
+      flex: 1;
+      margin-right: $space-sm;
+      color: $color-text-main;
+    }
+
+    .copy-btn {
+      background: $color-primary;
+      color: #fff;
+      padding: $space-xs $space-md;
+      border-radius: $radius-full;
+      font-size: $font-xs;
+      font-weight: 600;
+      flex-shrink: 0;
+
+      &:active { transform: scale(0.95); }
+    }
+  }
+
+  .invite-tip {
+    font-size: $font-xs;
+    color: $color-text-light;
+  }
+}
+
+.input-card {
+  @include card;
+
+  .code-input {
+    border-bottom: 2rpx solid $color-border;
+    padding: $space-md 0;
+    font-size: $font-base;
+    margin-bottom: $space-lg;
+  }
+
+  .bind-btn {
+    background: $color-primary !important;
+    color: #fff !important;
+    border-radius: $radius-full !important;
+    font-size: $font-md !important;
+    font-weight: 600 !important;
+    height: 96rpx;
+    line-height: 96rpx;
+    border: none !important;
+
+    &[disabled] { opacity: 0.5; }
+  }
+}
+
+

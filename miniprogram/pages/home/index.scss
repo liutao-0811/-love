@@ -1,0 +1,311 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-home {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  @include glass;
+  
+  .nav-content {
+    height: 88rpx;
+    @include flex-center;
+    
+    .nav-title {
+      font-size: $font-md;
+      font-weight: 600;
+      color: $color-text-main;
+    }
+  }
+}
+
+.scroll-area {
+  height: 100vh;
+  padding: $space-lg;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.hero-card {
+  @include card;
+  margin-bottom: $space-lg;
+  text-align: center;
+  padding: $space-xl $space-lg;
+  
+  .couple-avatars {
+    @include flex-center;
+    margin-bottom: $space-lg;
+    
+    .avatar {
+      width: 120rpx;
+      height: 120rpx;
+      border-radius: 50%;
+      border: 4rpx solid $color-card;
+      box-shadow: $shadow-card;
+    }
+    
+    .heart-icon {
+      font-size: 48rpx;
+      margin: 0 $space-md;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+  }
+  
+  .days-counter {
+    margin-bottom: $space-lg;
+    
+    .days-label {
+      font-size: $font-sm;
+      color: $color-text-sub;
+      display: block;
+      margin-bottom: $space-xs;
+    }
+    
+    .days-number {
+      @include flex-center;
+      align-items: baseline;
+      
+      .digit {
+        font-size: $font-xxl;
+        font-weight: 300;
+        color: $color-primary;
+        letter-spacing: -2rpx;
+        font-variant-numeric: tabular-nums;
+      }
+      
+      .unit {
+        font-size: $font-md;
+        color: $color-text-sub;
+        margin-left: $space-xs;
+      }
+    }
+  }
+  
+  .bond-level {
+    .level-info {
+      @include flex-between;
+      margin-bottom: $space-sm;
+      
+      .level-title {
+        font-size: $font-base;
+        font-weight: 600;
+        color: $color-accent;
+      }
+      
+      .level-desc {
+        font-size: $font-xs;
+        color: $color-text-light;
+        flex-shrink: 1;
+        text-align: right;
+        max-width: 60%;
+        @include text-ellipsis(1);
+      }
+    }
+    
+    .progress-bar {
+      height: 12rpx;
+      background: $color-primary-light;
+      border-radius: $radius-full;
+      overflow: hidden;
+      
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, $color-primary, $color-accent);
+        border-radius: $radius-full;
+        transition: width 1s $ease-out;
+      }
+    }
+  }
+}
+
+.info-row {
+  display: flex;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+  
+  .weather-card, .anniversary-card {
+    flex: 1;
+    @include card;
+    @include flex-center;
+    flex-direction: column;
+    padding: $space-md;
+    
+    .weather-icon, .anni-icon {
+      font-size: 48rpx;
+      margin-bottom: $space-xs;
+    }
+    
+    .weather-info, .anni-info {
+      text-align: center;
+      
+      .weather-temp, .anni-title {
+        font-size: $font-md;
+        font-weight: 600;
+        display: block;
+      }
+      
+      .weather-city, .anni-days {
+        font-size: $font-xs;
+        color: $color-text-sub;
+      }
+    }
+  }
+}
+
+.quick-actions {
+  @include card;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: $space-lg;
+  padding: $space-lg $space-sm;
+  
+  .action-item {
+    @include flex-center;
+    flex-direction: column;
+    
+    .action-icon {
+      width: 96rpx;
+      height: 96rpx;
+      border-radius: $radius-md;
+      @include flex-center;
+      font-size: 40rpx;
+      margin-bottom: $space-sm;
+      
+      &.diary { background: rgba(232, 165, 152, 0.15); }
+      &.notes { background: rgba(181, 196, 177, 0.15); }
+      &.tasks { background: rgba(212, 165, 165, 0.15); }
+      &.countdown { background: rgba(168, 195, 212, 0.15); }
+    }
+    
+    .action-text {
+      font-size: $font-sm;
+      color: $color-text-main;
+    }
+  }
+}
+
+.recent-section {
+  @include card;
+  
+  .section-header {
+    @include flex-between;
+    margin-bottom: $space-md;
+    
+    .section-title {
+      font-size: $font-md;
+      font-weight: 600;
+    }
+    
+    .section-more {
+      font-size: $font-sm;
+      color: $color-text-sub;
+    }
+  }
+  
+  .recent-list {
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      padding: $space-sm 0;
+      
+      &:not(:last-child) {
+        border-bottom: 1rpx solid $color-border;
+      }
+      
+      .activity-dot {
+        width: 12rpx;
+        height: 12rpx;
+        border-radius: 50%;
+        background: $color-primary;
+        margin-top: 14rpx;
+        margin-right: $space-md;
+        flex-shrink: 0;
+      }
+      
+      .activity-content {
+        flex: 1;
+        
+        .activity-text {
+          font-size: $font-base;
+          display: block;
+          margin-bottom: 4rpx;
+        }
+        
+        .activity-time {
+          font-size: $font-xs;
+          color: $color-text-light;
+        }
+      }
+    }
+  }
+  
+  .empty-state {
+    @include flex-center;
+    flex-direction: column;
+    padding: $space-xl 0;
+    
+    .empty-icon {
+      font-size: 64rpx;
+      margin-bottom: $space-md;
+      opacity: 0.6;
+    }
+    
+    .empty-text {
+      font-size: $font-sm;
+      color: $color-text-light;
+    }
+  }
+}
+
+.unbound-guide {
+  @include flex-center;
+  flex-direction: column;
+  padding: 120rpx $space-lg;
+  text-align: center;
+
+  .guide-icon {
+    font-size: 96rpx;
+    margin-bottom: $space-lg;
+  }
+
+  .guide-title {
+    font-size: $font-xl;
+    font-weight: 700;
+    display: block;
+    margin-bottom: $space-sm;
+  }
+
+  .guide-desc {
+    font-size: $font-base;
+    color: $color-text-sub;
+    display: block;
+    margin-bottom: $space-xl;
+  }
+
+  .guide-btn {
+    background: $color-primary !important;
+    color: #fff !important;
+    border-radius: $radius-full !important;
+    font-size: $font-md !important;
+    font-weight: 600 !important;
+    padding: 0 80rpx !important;
+    height: 96rpx;
+    line-height: 96rpx;
+    border: none !important;
+  }
+}
+
+
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}

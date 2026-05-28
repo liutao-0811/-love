@@ -1,0 +1,42 @@
+// 颜色系统 - 奶油治愈系
+$color-bg: #FDFBF7;
+$color-card: #FFFFFF;
+$color-primary: #E8A598;
+$color-primary-light: rgba(232, 165, 152, 0.1);
+$color-secondary: #B5C4B1;
+$color-accent: #D4A5A5;
+$color-text-main: #2C2C2C;
+$color-text-sub: #8A8A8A;
+$color-text-light: #BFBFBF;
+$color-border: rgba(0, 0, 0, 0.04);
+$color-glass: rgba(255, 255, 255, 0.6);
+
+// 圆角系统
+$radius-sm: 12rpx;
+$radius-md: 24rpx;
+$radius-lg: 32rpx;
+$radius-full: 999rpx;
+
+// 阴影系统 - 柔和漫反射
+$shadow-card: 0 8rpx 32rpx rgba(0, 0, 0, 0.03);
+$shadow-float: 0 16rpx 48rpx rgba(0, 0, 0, 0.06);
+
+// 字体大小
+$font-xs: 20rpx;
+$font-sm: 24rpx;
+$font-base: 28rpx;
+$font-md: 32rpx;
+$font-lg: 36rpx;
+$font-xl: 48rpx;
+$font-xxl: 80rpx;
+
+// 间距系统
+$space-xs: 8rpx;
+$space-sm: 16rpx;
+$space-md: 24rpx;
+$space-lg: 32rpx;
+$space-xl: 48rpx;
+
+// 动画
+$ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+$duration-normal: 0.3s;

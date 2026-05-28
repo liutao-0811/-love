@@ -1,0 +1,197 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-checkin {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff5f7 0%, $color-bg 40%);
+  padding: $space-lg;
+}
+
+.hero {
+  text-align: center;
+  padding: $space-lg 0 $space-xl;
+
+  .slogan {
+    font-size: $font-lg;
+    font-weight: 700;
+    display: block;
+    margin-bottom: $space-sm;
+  }
+
+  .sub {
+    font-size: $font-sm;
+    color: $color-text-sub;
+  }
+}
+
+.calendar-card {
+  @include card;
+  margin-bottom: $space-lg;
+  background: #fff;
+
+  .month-nav {
+    @include flex-between;
+    margin-bottom: $space-md;
+
+    .month-label {
+      font-size: $font-md;
+      font-weight: 700;
+      color: $color-primary;
+    }
+
+    .nav-arrow {
+      width: 56rpx;
+      height: 56rpx;
+      @include flex-center;
+      font-size: $font-base;
+      color: $color-primary;
+      background: rgba(232, 165, 152, 0.15);
+      border-radius: 50%;
+
+      &.disabled {
+        color: $color-text-light;
+        background: $color-bg;
+      }
+    }
+  }
+
+  .week-header {
+    display: flex;
+    margin-bottom: $space-sm;
+
+    .wh-item {
+      flex: 1;
+      text-align: center;
+      font-size: $font-xs;
+      color: $color-text-sub;
+      font-weight: 500;
+    }
+  }
+
+  .month-grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    .day-cell {
+      width: calc(100% / 7);
+      aspect-ratio: 1;
+      @include flex-center;
+      flex-direction: column;
+      border-radius: $radius-sm;
+      transition: all 0.2s;
+
+      &.empty { background: transparent; }
+
+      &.future .day-num { color: $color-text-light; }
+
+      &.today {
+        border: 2rpx solid $color-primary;
+
+        .day-num { color: $color-primary; font-weight: 700; }
+      }
+
+      &.my-only { background: rgba(233, 165, 152, 0.25); }
+      &.partner-only { background: rgba(181, 196, 177, 0.25); }
+      &.both { background: rgba(233, 165, 152, 0.45); }
+
+      .day-num { font-size: $font-sm; line-height: 1.2; }
+      .day-heart { font-size: 26rpx; line-height: 1; }
+    }
+  }
+}
+
+.stats-row {
+  @include card;
+  display: flex;
+  align-items: center;
+  margin-bottom: $space-md;
+  padding: $space-lg;
+
+  .stat-card {
+    flex: 1;
+    text-align: center;
+
+    .stat-num {
+      font-size: $font-xxl;
+      font-weight: 300;
+      display: block;
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: $font-xs;
+      color: $color-text-sub;
+      margin-top: 4rpx;
+    }
+
+    &.my-stat .stat-num { color: $color-primary; }
+    &.partner-stat .stat-num { color: $color-secondary; }
+  }
+
+  .stat-divider {
+    width: 2rpx;
+    height: 80rpx;
+    background: $color-border;
+    margin: 0 $space-lg;
+  }
+}
+
+.legend-row {
+  display: flex;
+  justify-content: center;
+  gap: $space-lg;
+  margin-bottom: $space-xl;
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    font-size: $font-xs;
+    color: $color-text-sub;
+
+    .legend-dot {
+      width: 24rpx;
+      height: 24rpx;
+      border-radius: $radius-sm;
+
+      &.both { background: rgba(233, 165, 152, 0.45); }
+      &.my-only { background: rgba(233, 165, 152, 0.25); }
+      &.partner-only { background: rgba(181, 196, 177, 0.25); }
+    }
+  }
+}
+
+.checkin-action {
+  text-align: center;
+
+  .checkin-btn {
+    background: $color-primary;
+    border-radius: $radius-full;
+    padding: $space-md $space-xl;
+    display: inline-block;
+    margin-bottom: $space-md;
+    box-shadow: 0 8rpx 24rpx rgba(232, 165, 152, 0.4);
+    transition: all 0.2s;
+
+    &:active { transform: scale(0.97); }
+
+    &.done {
+      background: $color-secondary;
+      box-shadow: 0 8rpx 24rpx rgba(181, 196, 177, 0.4);
+    }
+
+    .btn-text {
+      color: #fff;
+      font-size: $font-md;
+      font-weight: 700;
+    }
+  }
+
+  .checkin-hint {
+    font-size: $font-xs;
+    color: $color-text-light;
+    display: block;
+
+    &.done-hint { color: $color-secondary; }
+  }
+}

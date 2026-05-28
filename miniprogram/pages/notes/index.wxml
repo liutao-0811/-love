@@ -1,0 +1,59 @@
+<view class="page-notes">
+  <view class="header" style="padding-top: {{headerPaddingTop}}px; padding-right: {{headerPaddingRight}}px;">
+    <text class="title">小纸条</text>
+    <view class="add-btn" bindtap="showEditor">+ 写纸条</view>
+  </view>
+
+  <scroll-view scroll-y class="notes-wall">
+    <view class="notes-grid">
+      <view 
+        class="note-card fade-in" 
+        wx:for="{{notes}}" 
+        wx:key="_id"
+        style="background: {{item.bgColor}}; transform: rotate({{item._rotate}}deg); animation-delay: {{index * 0.05}}s;"
+        bindlongpress="onLongPress"
+        data-id="{{item._id}}"
+      >
+        <text class="pin-icon" wx:if="{{item.isPinned}}">📌</text>
+        <text class="note-content">{{item.content}}</text>
+        <text class="note-time">{{item.timeStr}}</text>
+      </view>
+    </view>
+    
+    <view wx:if="{{notes.length === 0}}" class="empty-state">
+      <text class="empty-icon">💌</text>
+      <text class="empty-text">给 TA 写一张小纸条吧</text>
+    </view>
+    
+    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- 编辑弹窗 -->
+  <view class="editor-mask" wx:if="{{showEdit}}">
+    <view class="editor-panel" catchtap="noop">
+      <view class="editor-header">
+        <text class="editor-title">写小纸条</text>
+        <view class="editor-close" catchtap="hideEditor">×</view>
+      </view>
+      <textarea 
+        class="editor-input" 
+        placeholder="写下你想对 TA 说的话..." 
+        maxlength="200"
+        value="{{editContent}}"
+        bindinput="onEditInput"
+        focus="{{showEdit}}"
+      />
+      <view class="color-picker">
+        <view 
+          wx:for="{{bgColors}}" 
+          wx:key="*this"
+          class="color-dot {{editBgColor === item ? 'active' : ''}}"
+          style="background: {{item}};"
+          catchtap="selectBgColor"
+          data-color="{{item}}"
+        ></view>
+      </view>
+      <button class="send-btn" catchtap="sendNote" disabled="{{!editContent}}">发送</button>
+    </view>
+  </view>
+</view>

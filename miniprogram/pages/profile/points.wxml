@@ -1,0 +1,35 @@
+<view class="page-points">
+  <view class="header">
+    <text class="title">积分明细</text>
+    <text class="total">当前积分：{{myPoints}}</text>
+  </view>
+
+  <scroll-view scroll-y class="log-list" bindscrolltolower="loadMore">
+    <block wx:if="{{logs.length > 0}}">
+      <view class="log-item fade-in" wx:for="{{logs}}" wx:key="_id" style="animation-delay: {{index * 0.03}}s;">
+        <view class="log-info">
+          <text class="log-source">{{item.source}}</text>
+          <text class="log-time">{{item.timeStr}}</text>
+        </view>
+        <text class="log-amount {{item.type === 'earn' ? 'earn' : 'spend'}}">
+          {{item.type === 'earn' ? '+' : ''}}{{item.amount}}
+        </text>
+      </view>
+
+      <view class="loading-more" wx:if="{{loading}}">
+        <text>加载中...</text>
+      </view>
+      <view class="no-more" wx:if="{{noMore}}">
+        <text>没有更多了</text>
+      </view>
+    </block>
+
+    <view wx:else class="empty-state">
+      <text class="empty-icon">📊</text>
+      <text class="empty-text">暂无积分记录</text>
+      <text class="empty-desc">写日记、打卡任务都可以获得积分哦</text>
+    </view>
+
+    <view class="safe-bottom"></view>
+  </scroll-view>
+</view>

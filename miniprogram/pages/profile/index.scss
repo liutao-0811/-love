@@ -1,0 +1,108 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-profile {
+  min-height: 100vh;
+  background: $color-bg;
+  overflow-y: auto;
+}
+
+.profile-header {
+  @include flex-center;
+  flex-direction: column;
+  padding-bottom: $space-xl;
+  background: linear-gradient(180deg, $color-primary-light 0%, transparent 100%);
+  
+  .avatar {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+    border: 6rpx solid $color-card;
+    box-shadow: $shadow-float;
+    margin-bottom: $space-md;
+  }
+  
+  .nickname {
+    font-size: $font-lg;
+    font-weight: 700;
+    margin-bottom: $space-sm;
+  }
+  
+  .couple-tag {
+    background: $color-primary;
+    color: #fff;
+    padding: $space-xs $space-lg;
+    border-radius: $radius-full;
+    font-size: $font-sm;
+    
+    &.unbound {
+      background: $color-text-light;
+    }
+  }
+}
+
+.menu-list {
+  padding: 0 $space-lg;
+  box-sizing: border-box;
+}
+
+.stats-row {
+  @include card;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: $space-lg;
+  padding: $space-lg;
+  
+  .stat-item {
+    text-align: center;
+    
+    .stat-val {
+      font-size: $font-xl;
+      font-weight: 700;
+      color: $color-primary;
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: $font-xs;
+      color: $color-text-sub;
+      margin-top: 4rpx;
+    }
+  }
+  
+  .stat-divider {
+    width: 2rpx;
+    height: 60rpx;
+    background: $color-border;
+  }
+}
+
+.menu-group {
+  @include card;
+  margin-bottom: $space-lg;
+  padding: 0;
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: $space-lg;
+    border-bottom: 1rpx solid $color-border;
+    
+    &:last-child { border-bottom: none; }
+    &:active { background: rgba(0,0,0,0.01); }
+    
+    .menu-icon { font-size: 36rpx; margin-right: $space-md; }
+    .menu-text { flex: 1; font-size: $font-base; }
+    .menu-arrow { color: $color-text-light; font-size: $font-lg; }
+  }
+}
+
+.version-info {
+  text-align: center;
+  padding: $space-lg;
+  font-size: $font-xs;
+  color: $color-text-light;
+}
+
+

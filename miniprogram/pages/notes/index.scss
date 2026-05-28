@@ -1,0 +1,142 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-notes {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.header {
+  @include flex-between;
+  padding: $space-lg;
+  
+  .title { font-size: $font-xl; font-weight: 700; }
+  
+  .add-btn {
+    background: $color-secondary;
+    color: #fff;
+    padding: $space-sm $space-lg;
+    border-radius: $radius-full;
+    font-size: $font-sm;
+    font-weight: 600;
+  }
+}
+
+.notes-wall {
+  padding: 0 $space-lg;
+  box-sizing: border-box;
+}
+
+.notes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-md;
+  
+  .note-card {
+    width: calc(50% - #{$space-sm});
+    min-height: 240rpx;
+    border-radius: $radius-md;
+    padding: $space-lg;
+    position: relative;
+    box-shadow: $shadow-card;
+    transition: transform 0.2s;
+    
+    &:active { transform: scale(0.96) !important; }
+    
+    .pin-icon {
+      position: absolute;
+      top: $space-sm;
+      right: $space-sm;
+      font-size: $font-sm;
+    }
+    
+    .note-content {
+      font-size: $font-base;
+      line-height: 1.8;
+      color: $color-text-main;
+      word-break: break-all;
+      display: block;
+      margin-bottom: $space-md;
+    }
+    
+    .note-time {
+      font-size: $font-xs;
+      color: rgba(0,0,0,0.3);
+      position: absolute;
+      bottom: $space-sm;
+      right: $space-md;
+    }
+  }
+}
+
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  padding: 120rpx 0;
+  
+  .empty-icon { font-size: 96rpx; margin-bottom: $space-lg; opacity: 0.6; }
+  .empty-text { font-size: $font-base; color: $color-text-sub; }
+}
+
+.editor-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  @include flex-center;
+  
+  .editor-panel {
+    width: 85%;
+    background: $color-card;
+    border-radius: $radius-lg;
+    padding: $space-lg;
+
+    .editor-header {
+      @include flex-between;
+      margin-bottom: $space-md;
+
+      .editor-title { font-size: $font-md; font-weight: 600; }
+      .editor-close {
+        width: 48rpx;
+        height: 48rpx;
+        @include flex-center;
+        font-size: $font-lg;
+        color: $color-text-light;
+        border-radius: 50%;
+        background: $color-bg;
+      }
+    }
+    
+    .editor-input {
+      width: 100%;
+      height: 240rpx;
+      font-size: $font-base;
+      line-height: 1.8;
+      margin-bottom: $space-md;
+    }
+    
+    .color-picker {
+      display: flex;
+      gap: $space-sm;
+      margin-bottom: $space-lg;
+      
+      .color-dot {
+        width: 56rpx;
+        height: 56rpx;
+        border-radius: 50%;
+        border: 4rpx solid transparent;
+        
+        &.active { border-color: $color-text-main; transform: scale(1.1); }
+      }
+    }
+    
+    .send-btn {
+      background: $color-secondary !important;
+      color: #fff !important;
+      border-radius: $radius-full !important;
+      border: none !important;
+    }
+  }
+}
+
+

@@ -1,0 +1,16 @@
+<view class="page-badges">
+  <view class="header">
+    <text class="title">成就徽章</text>
+    <text class="subtitle">已解锁 {{unlockedCount}}/{{badges.length}}</text>
+  </view>
+
+  <view class="badge-grid">
+    <view class="badge-card {{item.unlocked ? 'unlocked' : 'locked'}} fade-in" wx:for="{{badges}}" wx:key="id" style="animation-delay: {{index * 0.05}}s;">
+      <text class="badge-icon">{{item.icon}}</text>
+      <text class="badge-name">{{item.name}}</text>
+      <text class="badge-desc">{{item.desc}}</text>
+      <view class="badge-lock" wx:if="{{!item.unlocked}}">🔒</view>
+    </view>
+    <view class="safe-bottom"></view>
+  </view>
+</view>

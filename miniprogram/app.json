@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/diary/index",
+    "pages/diary/create",
+    "pages/diary/detail",
+    "pages/growth/index",
+    "pages/profile/index",
+    "pages/profile/edit",
+    "pages/profile/points",
+    "pages/profile/badges",
+    "pages/profile/privacy",
+    "pages/checkin/index",
+    "pages/notes/index",
+    "pages/bind/index",
+    "pages/countdown/index"
+  ],
+  "window": {
+    "backgroundColor": "#FDFBF7",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FDFBF7",
+    "navigationBarTitleText": "我们的空间",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#8A8A8A",
+    "selectedColor": "#E8A598",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "空间",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/diary/index",
+        "text": "时光",
+        "iconPath": "assets/icons/diary.png",
+        "selectedIconPath": "assets/icons/diary-active.png"
+      },
+      {
+        "pagePath": "pages/growth/index",
+        "text": "成长",
+        "iconPath": "assets/icons/growth.png",
+        "selectedIconPath": "assets/icons/growth-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "assets/icons/profile.png",
+        "selectedIconPath": "assets/icons/profile-active.png"
+      }
+    ]
+  },
+  "requiredPrivateInfos": [
+    "chooseLocation"
+  ],
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

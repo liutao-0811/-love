@@ -1,0 +1,84 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.page-edit {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $space-lg;
+}
+
+.avatar-section {
+  @include flex-center;
+  flex-direction: column;
+  padding: $space-xl 0;
+
+  .avatar-btn {
+    position: relative;
+    width: 160rpx !important;
+    height: 160rpx !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: none !important;
+    margin-bottom: $space-md;
+    overflow: hidden;
+
+    &::after { border: none; }
+
+    .avatar {
+      width: 160rpx;
+      height: 160rpx;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .camera-icon {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 48rpx;
+      height: 48rpx;
+      background: $color-primary;
+      border-radius: 50%;
+      @include flex-center;
+      font-size: $font-sm;
+    }
+  }
+
+  .avatar-tip {
+    font-size: $font-sm;
+    color: $color-text-sub;
+  }
+}
+
+.form-card {
+  @include card;
+  margin-bottom: $space-lg;
+
+  .form-row {
+    @include flex-between;
+
+    .label {
+      font-size: $font-base;
+      flex-shrink: 0;
+      margin-right: $space-md;
+    }
+
+    .input {
+      flex: 1;
+      text-align: right;
+      font-size: $font-base;
+    }
+  }
+}
+
+.save-btn {
+  background: $color-primary !important;
+  color: #fff !important;
+  border-radius: $radius-full !important;
+  font-size: $font-md !important;
+  font-weight: 600 !important;
+  border: none !important;
+
+  &[disabled] { opacity: 0.5; }
+}
